@@ -23,6 +23,8 @@ import CustomModal from "../customModal";
 import LoginModalContent from "../loginModalContent";
 import CreateAccountModalContent from "../createAccountModalContent";
 import { AuthContext } from "../../contexts/AuthContext";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -97,6 +99,11 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [contentToShow, setContentToShow] = useState();
   const { storedUser } = useContext(AuthContext);
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log("URL changed:", location.pathname);
+  }, [location]);
   
   useEffect(() => {
     if (storedUser) {
@@ -161,30 +168,34 @@ export default function Header() {
             justifyContent: "center",
           }}
         >
-          {["Home", "Search"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
+        {["Home", "Search"].map((text, index) => (
+          <ListItem key={text} disablePadding sx={{ display: "block" }}>
+            <Link
+              to="/"
+              style={{
+                textDecoration: "none",
+                color: "#fff",
+                minHeight: 48,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
                 sx={{
-                  color: "#fff",
-                  minHeight: 48,
+                  color: "#FAFAFA",
+                  minWidth: 0,
+                  mr: "auto",
                   justifyContent: "center",
-                  px: 2.5,
                 }}
               >
-                <ListItemIcon
-                  sx={{
-                    color: "#FAFAFA",
-                    minWidth: 0,
-                    mr: "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  {index % 2 === 0 ? <Home /> : <Search />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+                {index === 0 ? <Home /> : <Home />}
+              </ListItemIcon>
+              <ListItemText primary={text} sx={{ opacity: 0 }} />
+            </Link>
+          </ListItem>
+        ))}
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

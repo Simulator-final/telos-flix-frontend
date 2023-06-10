@@ -18,7 +18,15 @@ export default function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Home />} path="/" exact />
+        <Route 
+          element={
+            <MovieProvider>
+              <Home />
+            </MovieProvider>
+          } 
+          path="/" 
+          exact 
+        />
 
         {isAuthenticated ? (
           <Route
@@ -37,15 +45,6 @@ export default function AppRoutes() {
         <Route
           element={
             <MovieProvider>
-              <Video />
-            </MovieProvider>
-          }
-          path="/video"
-          exact
-        />
-        <Route
-          element={
-            <MovieProvider>
               <MovieDetails />
             </MovieProvider>
           }
@@ -59,7 +58,9 @@ export default function AppRoutes() {
         />
         <Route
           element={
-            <VideoPlayer />
+            <MovieProvider>
+              <VideoPlayer />
+            </MovieProvider>
           }
           path="/video/:id/video_player"
         />

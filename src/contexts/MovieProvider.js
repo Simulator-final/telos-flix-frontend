@@ -25,8 +25,9 @@ export default function MovieProvider({ children }) {
     fetchMovies();
   }, []);
 
-  const moviesData = [...trendingMovies, ...freeMovies];
   // Create an array with only freeMovies and trendingMovies
+  const moviesData = [...trendingMovies, ...freeMovies];
+  console.log(moviesData);
 
   return (
     <MovieContext.Provider value={{ trendingMovies, freeMovies, apiURL, moviesData }}>
