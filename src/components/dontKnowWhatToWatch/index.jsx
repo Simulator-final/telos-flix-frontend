@@ -13,18 +13,8 @@ import "./index.css";
 
 
 function DontKnowWhatToWatch() {
-  const { trendingMovies, freeMovies } = useContext(MovieContext);
-  const trendingMovieGenres = trendingMovies.map(movie => movie.genres);
-  const freeMovieGenres = freeMovies.map(movie => movie.genres);
+  const { genres } = useContext(MovieContext);
 
-  const breakTrendingMovieGenres = trendingMovieGenres.flat();
-  const breakFreeMovieGenres = freeMovieGenres.flat();
-  const movieGenre = breakTrendingMovieGenres.concat(breakFreeMovieGenres);
-
-  const movieCategoriesSet = new Set(movieGenre);  // eliminates any duplicate values, keeping only the unique ones.
-  const movieCategories = Array.from(movieCategoriesSet);  //create an array that contains all the unique categories
-
-  console.log(movieCategories);
 
   return (
     <div className="dontKnowWhatToWatch">
@@ -32,11 +22,11 @@ function DontKnowWhatToWatch() {
         <QuestionMarkRounded /> Ainda não sabe o que assistir?
       </div>
       <div className="dontKnowWhatToWatchgrid">
-        {movieCategories.map((category) => (
-          <Button className="categoryButton" key={category}>
+        {genres.map((genre) => (
+          <Button className="categoryButton" key={genre}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <Settings />
-              {category}
+              {genre}
             </div>
             <ArrowForward />
           </Button>

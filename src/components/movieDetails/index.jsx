@@ -11,6 +11,7 @@ import Carousel from "../../components/carousel";
 import RateMovieModal from "../../components/rateMovieModal";
 import CustomizedProgressBars from "../../components/progressBar";
 import { MovieContext } from "../../contexts/MovieContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
 function MovieDetails() {
   const [open, setOpen] = useState(false);
@@ -20,14 +21,18 @@ function MovieDetails() {
   // Encontra o filme correspondente com base no ID
   const movie = movies.find((movie) => movie?._id === id);
   const navigate = useNavigate();
+  const {isLoggedIn} = useContext(AuthContext);
 
   if (!movie) {
-    return <div>Carregando...</div>; // Lógica de tratamento quando o filme não for encontrado
+    return <h2>Carregando...</h2>;   
   }
 
   function handleWatchButton () {
-    console.log("Watch button clicked");
-    navigate(`/video/${id}/video_player`);
+    if(isLoggedIn) {
+      navigate(`/video/${id}/video_player`);
+    } else {
+      alert("Para assistir o filme, é necessário fazer login.");
+    }
   }
 
   return (

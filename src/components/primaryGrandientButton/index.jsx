@@ -3,15 +3,14 @@ import "./index.css";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 
-function PrimaryGradientButton({ text, icon, onClick, onCloseModal }) {
-  const { isLoggedIn, username, closeModal } = useContext(AuthContext);
+function PrimaryGradientButton({ text, icon, onClick }) {
+  const { isLoggedIn, username } = useContext(AuthContext);
 
   useEffect(() => {
     if (isLoggedIn) {
       console.log(isLoggedIn);
-      closeModal(); // Close the login modal when the user is logged in
     }
-  }, [isLoggedIn, closeModal]);
+  }, [isLoggedIn]);
 
   const buttonText = isLoggedIn ? username : text;
   
