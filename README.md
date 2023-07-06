@@ -106,7 +106,7 @@ http://localhost:3000
 
 Agora você poderá visualizar e interagir com o projeto "telos-flix-frontend" localmente em seu ambiente de desenvolvimento.
 
-É possível acessar o deploy do projeto no seguinte link: 
+É possível acessar o deploy do projeto no seguinte link: https://telos-flix.vercel.app/
 
 
 
