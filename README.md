@@ -110,7 +110,6 @@ Agora você poderá visualizar e interagir com o projeto "telos-flix-frontend" l
 
 
 
-
 🤴🏾 Autor
 
 Nome: Lucas Souza
