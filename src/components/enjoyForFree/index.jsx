@@ -1,27 +1,77 @@
-import { CardGiftcardOutlined, SignalCellularAltOutlined } from "@mui/icons-material";
-import React from "react";
-import "./index.css";
+import { CardGiftcardOutlined } from "@mui/icons-material";
+import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { MovieContext } from "../../contexts/MovieContext";
 import MiniVideoCard from "../miniVideoCard";
+import "./index.css";
+
+async function checkImageAvailability(imageUrl) {
+  return new Promise((resolve) => {
+    const img = new Image();
+
+    img.addEventListener("error", () => {
+      resolve(false); // Image failed to load (404 not found)
+    });
+
+    img.addEventListener("load", () => {
+      resolve(true); // Image loaded successfully
+    });
+
+    img.src = imageUrl;
+  });
+}
+
+async function filterMoviesByImageAvailability(movies) {
+  const filteredMovies = [];
+
+  for (let i = 0; i < movies.length; i++) {
+    const movie = movies[i];
+    const isImageAvailable = await checkImageAvailability(movie.image);
+
+    if (isImageAvailable) {
+      filteredMovies.push(movie);
+    }
+
+    if (filteredMovies.length === 4) {
+      break; // Exit the loop after adding three movies
+    }
+  }
+
+  return filteredMovies;
+}
+
 function EnjoyForFree() {
-  const videos = [
-    {
-      title: "Video 1",
-    },
-    {
-      title: "Video 2",
-    },
-    {
-      title: "Video 3",
-    },
-  ];
+  const { apiURL, freeMovies } = useContext(MovieContext);
+  const movies = freeMovies || [];
+
+  const [filteredMovies, setFilteredMovies] = useState([]);
+
+  useEffect(() => {
+    const fetchFilteredMovies = async () => {
+      const filteredMovies = await filterMoviesByImageAvailability(movies);
+      setFilteredMovies(filteredMovies);
+    };
+
+    fetchFilteredMovies();
+  }, [movies]);
+
   return (
-    <div className="enjoyForfreeSection">
-      <div className="labelSection">
-        <CardGiftcardOutlined /> Aproveite grátis
-      </div>
-      <div className="enjoyForfreeVideosGrid">
-        {videos.map((video) => (
-          <MiniVideoCard title={video.title} />
+    <div className="trendingSection">
+      <div className="labelSection" style={{marginLeft: "60px"}}>Aproveite grátis</div>
+      <div className="trendingVideosGrid">
+        {filteredMovies.map((movie) => (
+          movie ? (
+            <Link
+              style={{
+                textDecoration: "none",
+                color: "#EEEEEE",
+              }}
+              to={`/movies/${movie._id}`}
+              key={movie._id}
+            >
+              <MiniVideoCard image={movie.image} />
+            </Link>
+          ) : null
         ))}
       </div>
     </div>

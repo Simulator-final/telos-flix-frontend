@@ -1,33 +1,31 @@
+import React, { useContext } from "react";
 import { Button } from "@mui/material";
-import React from "react";
+import {
+  ArrowForward,
+} from "@mui/icons-material";
+
+import { MovieContext } from "../../contexts/MovieContext";
 import "./index.css";
-import { ArrowForward, QuestionAnswer, QuestionMark, QuestionMarkRounded, Settings } from "@mui/icons-material";
+import {Link} from "react-router-dom";
+
+
 function DontKnowWhatToWatch() {
-  const categories = [
-    { title: "Categoria 1" },
-    { title: "Categoria 2" },
-    { title: "Categoria 3" },
-    { title: "Categoria 4" },
-    { title: "Categoria 5" },
-    { title: "Categoria 6" },
-    { title: "Categoria 7" },
-    { title: "Categoria 8" },
-    { title: "Categoria 9" },
-  ];
+  const { genres } = useContext(MovieContext);
+
+
   return (
     <div className="dontKnowWhatToWatch">
-      <div className="labelSection">
-        <QuestionMarkRounded /> Aproveite grátis
-      </div>
+      <div className="labelSection"> Ainda não sabe o que assistir?</div>
       <div className="dontKnowWhatToWatchgrid">
-        {categories.map((category) => (
-          <Button className="categoryButton">
-            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              <Settings />
-              {category.title}
-            </div>
-            <ArrowForward />
-          </Button>
+        {genres.map((genre) => (
+          <Link to={`movies/genres/${genre}`} key={genre} style={{ textDecoration: 'none'}}>
+            <Button className="categoryButton">
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                {genre}
+              </div>
+              <ArrowForward />
+            </Button>
+          </Link>
         ))}
       </div>
     </div>

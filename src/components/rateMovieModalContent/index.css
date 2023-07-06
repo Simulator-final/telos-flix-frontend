@@ -1,0 +1,106 @@
+.RateModal{
+  display: flex;
+  flex-direction: column;
+  margin: 100px 45px 60px 45px;
+  gap: 30px;
+}
+
+.RateModalMain{
+  display:flex;
+  flex-direction:column;
+  gap: 65px;
+}
+
+.WhatsIsYourOpinion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.WhatsIsYourOpinion h3{
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 17px;
+  line-height: 21px;
+  text-align: start;
+  width: 253px;
+  height: 21px;
+  color: #D7E7FF;
+  margin: 0!important;
+}
+.WhatsIsYourOpinion p{
+  width: 370px;
+  height: 40px;
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20px;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0!important;
+}
+
+.WhatsIsYourOpinion .RatingStarsDiv{
+  display:flex;
+  align-items:center;
+  padding-top:20px;
+  justify-Content:center;
+}
+
+.HaveSomeComment {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.HaveSomeComment h5{
+  margin: 0!important;
+  width: 199px;
+  height: 20px;
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.buttons {
+  display: flex;
+  gap:25px;
+  justify-Content:end;
+}
+.buttons .ImNotInTheMoodButton{
+  display: flex;
+  align-items: center;
+  justify-Content: center;
+  width: 172px;
+  height: 50px;
+  background: #3D4757;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  color: #3888FF;
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: right;
+}
+.buttons .SendButton{
+  display: flex;
+  align-items: center;
+  justify-Content: center;
+  width: 129px;
+  height: 50px;
+  background: radial-gradient(34.52% 69% at 50.35% 80%, #31A7FC 0%, #3888FF 100%);
+  box-shadow: 0px 22px 53px rgba(56, 136, 255, 0.17), 0px 9.19107px 22.1421px rgba(56, 136, 255, 0.122205), 0px 4.91399px 11.8382px rgba(56, 136, 255, 0.101338), 0px 2.75474px 6.63642px rgba(56, 136, 255, 0.085), 0px 1.46302px 3.52455px rgba(56, 136, 255, 0.0686618), 0px 0.608796px 1.46665px rgba(56, 136, 255, 0.0477948), inset 0px -1.5px 0px rgba(215, 231, 255, 0.25);
+  border-radius: 20px;
+  color: #FFFFFF;
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: right;
+}

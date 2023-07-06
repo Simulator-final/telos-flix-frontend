@@ -1,19 +1,21 @@
 .miniVideoCard {
-  box-sizing: border-box;
-  width: 367px;
-  height: 244.66px;
-  left: 0%;
-  right: 0%;
-  margin-top: 48px;
-  bottom: 0%;
-  display:flex;
-  align-items: end;
-  justify-content: center;
+  /* Styles for the container div */
+  position: relative;
+  width: 90%;
+  height: 0;
+  padding-bottom: 84.37%; /* Assuming a 16:9 aspect ratio, adjust as needed */
+}
 
-  background: #292929;
-  border: 1px solid rgba(238, 238, 238, 0.05);
-
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  padding-bottom: 10px;
+.miniVideoCard img {
+  /* Styles for the image */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 62.5%;
+  height: 100%;
+  object-fit: scale-down; /* Ensures the image fills the container without distortion */
+  border-radius: 4px; /* Apply border radius to the image */
+  z-index: 1;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8); /* Add box shadow to the image */
 }

@@ -1,11 +1,14 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import { useEffect } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const style = {
   position: "absolute",
   borderRadius: "20px",
-
+  
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -21,7 +24,20 @@ const style = {
 };
 
 export default function CustomModal({ open, setOpen, content }) {
-  const handleClose = () => setOpen(false);
+  const { isLoggedIn } = useContext(AuthContext);
+  
+  useEffect(() => {
+    if (isLoggedIn) {
+      console.log(isLoggedIn);
+      setOpen(false);
+    }
+  }, [isLoggedIn, setOpen]);
+
+  const handleClose = () => {
+    if (!isLoggedIn) {
+      setOpen(false);
+    }
+  };
 
   return (
     <div>

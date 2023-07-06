@@ -1,0 +1,34 @@
+.Carousel {
+  display: flex;
+  flex-direction: column;
+  margin-top: 62px;
+  gap: 15px;
+  overflow: hidden;
+}
+
+.CommentsCarrosel {
+  display: flex;
+  overflow-x: scroll; /* Enable horizontal scrolling */
+  gap: 20px;
+  max-width: 900px;
+  cursor: grab;
+  scroll-snap-type: x mandatory; /* Ensure smooth scrolling */
+  scroll-padding: 0 20px; /* Add padding to the left and right */
+  
+  /* Styling the scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
+}
+
+.CommentsCarrosel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.CommentsCarrosel::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 40px;
+}
+
+.CommentsCarrosel::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.1);
+}

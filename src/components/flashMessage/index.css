@@ -1,0 +1,70 @@
+.flash-message {
+  position: fixed;
+  background: linear-gradient(
+      0deg,
+      rgba(238, 238, 238, 0.05),
+      rgba(238, 238, 238, 0.05)
+    ),
+    linear-gradient(272.56deg, #8EC5FC -13.13%, #E0C3FC 42.75%, #FAE69F 82.67%);
+  border-radius: 15px;
+  width: 400px;
+  height: 35px;
+  text-align: center;
+  position: fixed;
+  top: 20px; /* Adjust the top position as desired */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+}
+
+
+
+.message-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px;
+}
+
+.flash-message p {
+  padding-left: 5px;
+  font-weight: 600;
+  font-size: medium;
+  margin: 0; 
+  color: #292929;
+}
+
+.flash-message button {
+  background-color: #292929;
+  border: none;
+  padding-right: 12px;
+  color: white;
+}
+
+.flash-message button.close-button {
+  background-color: transparent; 
+}
+
+.flash-message button p {
+  font-size: 13pt;
+}
+
+.loading-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background-color: #212121;
+  animation: loading-animation 3s linear;
+  width: 0;
+  transform-origin: left center;
+}
+
+@keyframes loading-animation {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}

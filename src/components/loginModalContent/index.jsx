@@ -8,13 +8,46 @@ import SecondaryGradientButton from "../secondaryGrandientButton";
 import { AddBoxOutlined } from "@mui/icons-material";
 import CustomOutlinedInput from "../customOutlinedInput";
 import PasswordOutlinedInput from "../passwordOutlinedInput";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useContext } from "react";
+import FlashMessage from "../flashMessage";
 
 export default function LoginModalContent({ setCreateAccountContent }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useContext(AuthContext);
+  const [flashMessage, setFlashMessage] = useState('');
+
+  const showFlashMessage = (message) => {
+    setFlashMessage(message);
+    setTimeout(() => {
+      setFlashMessage("");
+    }, 3000); // Hide the flash message after 3 seconds
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Prevent form submission
+
+    if (!email || !password) {
+      showFlashMessage("Please enter your email and password.");
+      return;
+    }
+
+    try {
+      await login({ email, password }); // Pass an object containing email and password
+      console.log("Login successful!");
+    } catch (error) {
+      console.error("Login error:", error);
+    }
+  };
 
   return (
     <div className="loginModalContent">
+      <div className="flashMessageContainer">
+        {flashMessage && (
+        <FlashMessage message={flashMessage} onClose={() => setFlashMessage("")} />
+        )}
+      </div>
       <div className="firstSection">
         Login
         <div className="imageContainer">
@@ -22,7 +55,7 @@ export default function LoginModalContent({ setCreateAccountContent }) {
         </div>
       </div>
       <div className="secondSection">
-        <FormControl sx={{ m: 1, width: "366px" }}>
+        <form onSubmit={handleLogin} sx={{ m: 1, width: "366px" }}>
           <div className="inputContainer">
             <label className="inputLabel">Email</label>
             <CustomOutlinedInput
@@ -43,10 +76,14 @@ export default function LoginModalContent({ setCreateAccountContent }) {
             <PasswordOutlinedInput setValue={setPassword} />
           </div>
           <div className="buttonsSection">
-            <PrimaryGradientButton text="Entrar" />
-            <SecondaryGradientButton text="Quero criar uma conta" onClick={setCreateAccountContent} icon={<AddBoxOutlined />} />
+            <PrimaryGradientButton text="Entrar" type="submit" />
+            <SecondaryGradientButton
+              text="Quero criar uma conta"
+              onClick={setCreateAccountContent}
+              icon={<AddBoxOutlined />}
+            />
           </div>
-        </FormControl>
+        </form>
       </div>
     </div>
   );

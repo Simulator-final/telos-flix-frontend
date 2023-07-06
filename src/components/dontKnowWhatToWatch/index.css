@@ -11,12 +11,13 @@
   justify-content: start;
   align-items: center;
   gap: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 15px;
+  font-size: 17pt;
 }
 
 .dontKnowWhatToWatchgrid .categoryButton {
   width: 338px;
-  height: 60px;
+  height: 56px;
 
   /* Color/Neutral/800 */
 
@@ -28,4 +29,6 @@
   padding-left: 22px;
   padding-right: 22px;
   color: white;
+  font-size: 11pt;
+  text-decoration: none;
 }

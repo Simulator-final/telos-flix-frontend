@@ -1,5 +1,5 @@
-import { useState } from "react";
-
+import { BrowserRouter as Router, Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -11,7 +11,6 @@ import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { Home, Search } from "@mui/icons-material";
@@ -22,6 +21,14 @@ import AppBarActions from "../appBarActions";
 import CustomModal from "../customModal";
 import LoginModalContent from "../loginModalContent";
 import CreateAccountModalContent from "../createAccountModalContent";
+import { AuthContext } from "../../contexts/AuthContext";
+import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
+import Grid from "@mui/material/Grid";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import Logout from "@mui/icons-material/Logout";
+import { Typography } from "@mui/material";
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -77,81 +84,143 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" })(
-  ({ theme, open }) => ({
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: "nowrap",
-    boxSizing: "border-box",
-    ...(open && {
-      ...openedMixin(theme),
-      "& .MuiDrawer-paper": openedMixin(theme),
-    }),
-    ...(!open && {
-      ...closedMixin(theme),
-      "& .MuiDrawer-paper": closedMixin(theme),
-    }),
-  })
-);
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  width: drawerWidth,
+  flexShrink: 0,
+  whiteSpace: "nowrap",
+  boxSizing: "border-box",
+  ...(open && {
+    ...openedMixin(theme),
+    "& .MuiDrawer-paper": openedMixin(theme),
+  }),
+  ...(!open && {
+    ...closedMixin(theme),
+    "& .MuiDrawer-paper": closedMixin(theme),
+  }),
+}));
+
+const StyledButton = styled(Button)(({ theme }) => ({
+  color: "#eeeeee",
+  fontWeight: "600",
+  padding: "8px 16px",
+}));
+
+const ProfileComponent = ({ user, onLogout }) => {
+  return (
+    <StyledButton>
+      <Grid container spacing={1} alignItems="center">
+        <Grid item>
+          <Avatar>{user?.name?.charAt(0)}</Avatar>
+        </Grid>
+        <Grid item>
+          <IconButton onClick={onLogout}>
+            <Logout style={{marginRight: '-50px', color: '#eeeeee', opacity: '0.2'}}/>
+          </IconButton>
+        </Grid>
+      </Grid>
+    </StyledButton>
+  );
+};
 
 export default function Header() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [contentToShow, setContentToShow] = useState(<></>);
+  const [contentToShow, setContentToShow] = useState();
+  const { storedUser, setStoredUser, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Perform logout logic here
+    setStoredUser(null);
+  };
+
+  useEffect(() => {
+    if (storedUser) {
+      setOpen(false);
+    }
+  }, [storedUser]);
+
+  const handleHomeClick = () => {
+    navigate('/');
+  }
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar position="fixed" elevation={0}>
-        <Toolbar
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <img src={logo} alt="logo" />
-          <AppBarActions
-            actions={[
-              <CreateAccountButton
-                onClick={() => {
-                  setContentToShow(<CreateAccountModalContent />);
-                  setOpen(true);
-                }}
-              />,
-              <LoginButton
-                onClick={() => {
-                  setContentToShow(
-                    <LoginModalContent
-                      setCreateAccountContent={() => {
-                        setContentToShow(<CreateAccountModalContent />);
-                      }}
-                    />
-                  );
-                  setOpen(true);
-                }}
-              />,
-            ]}
-          />
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent">
-        <DrawerHeader>
-          <IconButton sx={{ color: "#fff" }}>
-            {theme.direction === "rtl" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </DrawerHeader>
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <AppBar position="fixed" elevation={0}>
+          <Toolbar
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              position: "relative",
+            }}
+          >
+            <Box sx={{ display: "flex", color: "#eeeeee" }}>
+              <img src={logo} alt="logo" />
+              <Typography variant="h6" sx={{ fontWeight: "500", ml: 1, marginTop: 0 }}>
+                TelosFlix
+              </Typography>
+            </Box>
+            {storedUser?.name && (
+              <ProfileComponent user={storedUser} onLogout={logout} />
+            )}
+            {!storedUser?.name && (
+              <AppBarActions
+                actions={[
+                  <CreateAccountButton
+                    onClick={() => {
+                      setContentToShow(
+                        <CreateAccountModalContent 
+                          setCreateAccountContent={() => {
+                            setContentToShow(<LoginModalContent />);
+                          }}
+                        />
+                      );
+                      setOpen(true);
+                    }}
+                  />,
+                  <LoginButton
+                    onClick={() => {
+                      setContentToShow(
+                        <LoginModalContent
+                          setCreateAccountContent={() => {
+                            setContentToShow(<CreateAccountModalContent />);
+                          }}
+                        />
+                      );
+                      setOpen(true);
+                    }}
+                  />,
+                ]}
+              />
+            )}
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent">
+          <DrawerHeader>
+            <IconButton sx={{ color: "#fff" }} onClick={() => setOpen(!open)}>
+              {theme.direction === "rtl" ? (
+                <ChevronRightIcon />
+              ) : (
+                <ChevronLeftIcon />
+              )}
+            </IconButton>
+          </DrawerHeader>
 
-        <List
-          sx={{
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-        >
-          {["Home", "Search"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
+          <List
+            sx={{
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              marginLeft: "15px",
+            }}
+          >
+            <ListItem key="Home" disablePadding sx={{ display: "block" }}>
+              <Link
+                to="/"
                 sx={{
                   color: "#fff",
                   minHeight: 48,
@@ -167,18 +236,41 @@ export default function Header() {
                     justifyContent: "center",
                   }}
                 >
-                  {index % 2 === 0 ? <Home /> : <Search />}
+                  <Home />
                 </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: 0 }} />
-              </ListItemButton>
+                <ListItemText primary="Home" sx={{ opacity: 0 }} />
+              </Link>
             </ListItem>
-          ))}
-        </List>
-      </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
+            <ListItem key="Search" disablePadding sx={{ display: "block" }}>
+              <Link
+                component={Link}
+                to="/search"
+                sx={{
+                  color: "#fff",
+                  minHeight: 48,
+                  justifyContent: "center",
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    color: "#FAFAFA",
+                    minWidth: 0,
+                    mr: "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Search />
+                </ListItemIcon>
+                <ListItemText primary="Search" sx={{ opacity: 0 }} />
+              </Link>
+            </ListItem>
+          </List>
+        </Drawer>
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <DrawerHeader />
+        </Box>
+        <CustomModal open={open} setOpen={setOpen} content={contentToShow} />
       </Box>
-      <CustomModal open={open} setOpen={setOpen} content={contentToShow} />
-    </Box>
   );
 }

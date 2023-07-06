@@ -1,0 +1,56 @@
+.CommentCard{
+  background: #292929;
+  border: 1px solid rgba(238, 238, 238, 0.05);
+  border-radius: 20px;
+  width: 347px;
+  height: 190px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-Content: center;
+}
+.CommentCard h3{
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 20px;
+  color: #FAFAFA;
+  margin: 0!important;
+}
+.CommentCard p{
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  color: #FAFAFA;
+  margin: 0!important; 
+  text-align: left;
+  width: 319px;
+  height: 66px;
+}
+.CommentCard h5{
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 18px;
+  color: #EEEEEE;
+  margin: 0!important; 
+}
+
+.CommentCardContent{
+  width: 319px;
+  height: 158px;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  gap: 20px;
+  margin: 30px 30px 30px 30px;
+}
+
+.RatingNoteDiv{
+  display:flex;
+  gap: 16px;
+}
