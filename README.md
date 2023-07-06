@@ -1,70 +1,122 @@
-# Getting Started with Create React App
+TelosFlix
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+📑 Sobre o Projeto
 
-### `npm start`
+Este projeto consiste em uma plataforma de streaming desenvolvida durante o Bootcamp da Telos Conecta. A TelosFlix foi o desafio final do Bootcamp, desenvolvido por 5 pessoas(front e back-end) e, posteriormente, aprensentado para empresas e recrutadores. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+O objetivo principal do projeto é construir uma aplicação CRUD com as principais funcionalidades das plataformas de streaming de vídeo, como categorias por gênero de filme, busca por filmes e avaliação. Além disso, também há funcionalidades como a criação de novos usuários e login.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+💼 Regras de Negócio
 
-### `npm run build`
+1. Player de vídeo:
+   A reprodução dos títulos só será permitida, caso o usuário esteja logado. Caso o usuário tenha acesso ao URL do filme, mas não esteja logado ele será redirecionado ao modal de login. 
+2. Avaliação:
+   A feature de avaliação com estrelas e comentários no filme só será habilitada para usuários logados.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+✨ Decisões Tomadas
 
-### `npm run eject`
+Durante o desenvolvimento do projeto, foram tomadas algumas decisões importantes para garantir a qualidade, organização e eficiência do código. Abaixo estão as decisões tomadas e o motivo pelo qual foram escolhidas.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Material UI:
+   O Material UI é uma biblioteca de componentes UI para React baseada no design do Material Design. Ela oferece uma ampla variedade de componentes estilizados prontos para uso, como botões, caixas de diálogo, barras de navegação, entre outros. No projeto, o Material UI foi utilizado para criar a aparência visual e estilização de alguns componentes da interface.
+2. Context API:
+   A Context API é uma funcionalidade do React que permite o compartilhamento de estado entre componentes sem a necessidade de passar props manualmente através da árvore de componentes. Ela cria um contexto que pode ser acessado por componentes filhos que estão dentro desse contexto. No projeto, a Context API foi utilizada para criar contexto de filmes, avaliação e autenticação. No caso do último, por exemplo, o contexto permite que as informações do usuário que está logado sejam compartilhadas entre os componentes sem a necessidade de passá-las explicitamente como props.
+3. React Router Dom:
+   O React Router Dom é uma biblioteca de roteamento para o React. Ela permite a criação de rotas e o gerenciamento da navegação dentro da aplicação. Com o React Router Dom, é possível definir rotas para diferentes componentes e controlar a renderização desses componentes com base na URL atual. No projeto, o React Router Dom foi utilizado para definir as rotas da aplicação, como a rota inicial, a rota de detalhes do filme, a rota de pesquisa, entre outras.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+📚 Organização do Código
 
-## Learn More
+A estrutura de pastas do projeto é organizada da seguinte forma:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+├── public
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+│   └── ...
 
-### Code Splitting
+│
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+└── src
 
-### Analyzing the Bundle Size
+   ├── components
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+   │   
 
-### Making a Progressive Web App
+   │   
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+   ├── contexts
 
-### Advanced Configuration
+   │
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+   |
 
-### Deployment
+   ├── pages
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Na pasta public, encontramos os arquivos estáticos relacionados à aplicação. Todos esses arquivos são acessíveis publicamente.
 
-### `npm run build` fails to minify
+Dentro da pasta src, encontramos a pasta que contém os componentes da aplicação, outra com os contextos e mais uma para comportar as páginas.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+🎯 Funcionalidades
+
+As funcionalidades principais do projeto incluem:
+
+Filtragem de Vídeos: Os usuários podem aplicar filtros na área "Ainda não sabe o que assistir" e clicar em um gênero específico para exibir a listagem de filmes. 
+
+Avaliação de filmes: Os usuários podem avaliar os filmes com estrelas num intervalo de 1 a 5 e escrever comentários sobre os filmes. 
+
+Busca: Dentro da barra de pesquisa é possível pesquisar por filmes pelo título. 
+
+Player: Clicando no botão de assistir, o usuário logado é redirecionado para o player de vídeo. 
+
+
+
+💻 Instruções de Instalação e de Uso
+
+Para instalar e usar o projeto "telos-flix-frontend", siga as instruções abaixo:
+
+Faça um fork do projeto no GitHub: Acesse o link https://github.com/Simulator-final/telos-flix-frontend/fork e clique no botão "Fork" no canto superior direito da página. Isso criará uma cópia do projeto em seu próprio repositório do GitHub.
+
+Clone o repositório: No seu terminal, navegue até o diretório onde deseja clonar o projeto e execute o seguinte comando:
+
+git clone https://github.com/Simulator-final/telos-flix-frontend.git
+
+Acesse o diretório do projeto: Execute o seguinte comando no terminal para entrar no diretório do projeto:
+
+cd telos-flix-frontend
+
+Instale as dependências: Execute o comando a seguir para instalar as dependências do projeto usando o npm:
+
+npm install
+
+Inicie o servidor de desenvolvimento: Após a conclusão da instalação das dependências, execute o seguinte comando para iniciar o servidor de desenvolvimento:
+
+npm start
+
+Acesse o projeto: Abra o seu navegador e digite o seguinte endereço:
+
+http://localhost:3000
+
+Agora você poderá visualizar e interagir com o projeto "telos-flix-frontend" localmente em seu ambiente de desenvolvimento.
+
+É possível acessar o deploy do projeto no seguinte link: 
+
+
+
+
+🤴🏾 Autor
+
+Nome: Lucas Souza
+
+E-mail: lucassouzafranco1@gmail.com
+
+Perfil no GitHub: https://github.com/lucassouzafranco
+
+Perfil no LinkedIn: https://www.linkedin.com/in/lucas-souza-franco/
